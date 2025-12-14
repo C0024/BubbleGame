@@ -1,0 +1,154 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Orbitron', sans-serif;
+  color: white;
+}
+
+/* HUD */
+.timeboard {
+  margin: 20px;
+  padding: 15px 30px;
+  font-size: 24px;
+  display: flex;
+  gap: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* Game Area */
+.gameboard {
+  position: relative;
+  width: 850px;
+  height: 700px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.05);
+  border: 2px solid rgba(255,255,255,0.2);
+  overflow: hidden;
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.6);
+}
+
+/* Ball */
+.ball {
+  position: absolute;
+  border-radius: 50%;
+  cursor: pointer;
+  animation: pop 0.25s ease-out;
+  box-shadow: 0 0 20px red;
+  transition: transform 0.15s ease;
+
+}
+
+.ball:hover {
+  transform: scale(1.2);
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Burst animation */
+@keyframes burst {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 0 20px currentColor;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+    box-shadow: 0 0 60px currentColor;
+  }
+}
+
+.ball.burst {
+  animation: burst 0.35s ease-out forwards;
+  pointer-events: none;
+}
+
+
+/* Overlay */
+.game-over-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;  /* hidden by default */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+
+/* Show the popup */
+.game-over-popup.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Popup card */
+.popup-content {
+  background: linear-gradient(135deg, #1f1f1f, #333);
+  padding: 40px 60px;
+  border-radius: 20px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 0 40px #ff4d4d;
+  transform: scale(0.8);
+  transition: transform 0.3s ease;
+}
+
+.game-over-popup.show .popup-content {
+  transform: scale(1);
+}
+
+.popup-content h2 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: #ff4d4d;
+}
+
+.popup-content p {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.popup-content button {
+  font-size: 24px;
+  padding: 12px 40px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #ff4d4d;
+  color: white;
+  box-shadow: 0 0 20px #ff4d4d;
+  transition: all 0.2s ease;
+}
+
+.popup-content button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px #ff4d4d;
+}
+
