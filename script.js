@@ -33,7 +33,7 @@ playAgainBtn.addEventListener("click", () => {
 
 document.body.addEventListener("click", () => {
   bgMusic.play();
-});
+},{once : true);
 
 let a = setInterval(() => {
   const posx = Math.floor(Math.random() * (850 - ballSize));
@@ -106,3 +106,4 @@ let d = setInterval(() => {
     clearInterval(d);
   }
 }, 1000);
+
